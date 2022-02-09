@@ -21,7 +21,7 @@
                 hashAndFill('SHA-512');
             });
 
-            document.querySelectorAll('input[id^="SHA"]').forEach(v => {
+            document.querySelectorAll('.shagroup input').forEach(v => {
                 v.addEventListener('click', () => {
                     navigator.clipboard.writeText(v.value)
                         .then(
@@ -39,22 +39,43 @@
 
         document.addEventListener('DOMContentLoaded', main);
     </script>
+    <style>
+        #mainText {
+            width: 80%;
+            height: 6em;
+            margin-bottom: 0.6em;
+        }
+
+        .shagroup input {
+            width: calc(80% - 7em);
+            height: 2em;
+        }
+
+        .shagroup {
+            height: 2.4em;
+        }
+
+        #generateButton {
+            width: 80%;
+            height: 3em;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Hashes</h1>
     <textarea id="mainText"></textarea>
     <div>
-        <div>
-            <label for="SHA-256-Text">SHA-256: </label>
+        <div class="shagroup">
+            <label for="SHA-256-Text">SHA-256:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" id="SHA-256-Text" readonly="readonly">
         </div>
-        <div>
-            <label for="SHA-384-Text">SHA-384: </label>
+        <div class="shagroup">
+            <label for="SHA-384-Text">SHA-384:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" id="SHA-384-Text" readonly="readonly">
         </div>
-        <div>
-            <label for="SHA-512-Text">SHA-512: </label>
+        <div class="shagroup">
+            <label for="SHA-512-Text">SHA-512:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" id="SHA-512-Text" readonly="readonly">
         </div>
     </div>
