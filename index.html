@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script>
         'use strict';
         function main() {
@@ -41,14 +43,15 @@
     </script>
     <style>
         #mainText {
-            width: 80%;
+            width: 95%;
             height: 6em;
             margin-bottom: 0.6em;
         }
 
         .shagroup input {
-            width: calc(80% - 7em);
+            width: calc(95% - 7em);
             height: 2em;
+            right: 0;
         }
 
         .shagroup {
@@ -56,7 +59,7 @@
         }
 
         #generateButton {
-            width: 80%;
+            width: 95%;
             height: 3em;
         }
     </style>
@@ -64,24 +67,27 @@
 
 <body>
     <h1>Hashes</h1>
-    <textarea id="mainText"></textarea>
-    <div>
-        <div class="shagroup">
-            <label for="SHA-256-Text">SHA-256:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="SHA-256-Text" readonly="readonly">
+    <div id="container">
+        <textarea id="mainText"></textarea>
+        <div>
+            <div class="shagroup">
+                <label for="SHA-256-Text">SHA-256:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="text" id="SHA-256-Text" readonly="readonly">
+            </div>
+            <div class="shagroup">
+                <label for="SHA-384-Text">SHA-384:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="text" id="SHA-384-Text" readonly="readonly">
+            </div>
+            <div class="shagroup">
+                <label for="SHA-512-Text">SHA-512:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="text" id="SHA-512-Text" readonly="readonly">
+            </div>
         </div>
-        <div class="shagroup">
-            <label for="SHA-384-Text">SHA-384:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="SHA-384-Text" readonly="readonly">
-        </div>
-        <div class="shagroup">
-            <label for="SHA-512-Text">SHA-512:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="SHA-512-Text" readonly="readonly">
+        <div>
+            <input type="button" id="generateButton" value="Compute">
         </div>
     </div>
-    <div>
-        <input type="button" id="generateButton" value="Compute">
-    </div>
+    
 </body>
 
 </html>
