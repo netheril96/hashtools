@@ -4,23 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha3/0.8.0/sha3.min.js"
+        integrity="sha512-PmGDkK2UHGzTUfkFGcJ8YSrD/swUXekcca+1wWlrwALIZho9JX+3ddaaI9wmmf8PmgDIpMtx6TU8YBJAZS0mPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         'use strict';
         function main() {
             const encoder = new TextEncoder();
 
-            async function hashAndFill(hashName) {
-                const text = document.getElementById('mainText').value;
-                const data = encoder.encode(text);
-                const buffer = await crypto.subtle.digest(hashName, data);
-                document.getElementById(hashName + '-Text').value = buf2hex(buffer);
+            async function hashAndFill(data, bits) {
+                const buffer = await crypto.subtle.digest('SHA-' + bits, data);
+                document.getElementById('SHA-' + bits + '-Text').value = buf2hex(buffer);
+            }
+
+            function hash3AndFill(data, bits) {
+                document.getElementById('SHA3-' + bits + '-Text').value = window['sha3_' + bits](data);
             }
 
             document.getElementById('generateButton').addEventListener('click', () => {
-                hashAndFill('SHA-256');
-                hashAndFill('SHA-384');
-                hashAndFill('SHA-512');
+                const text = document.getElementById('mainText').value.normalize('NFKC');
+                const data = encoder.encode(text);
+                hashAndFill(data, 256);
+                hashAndFill(data, 384);
+                hashAndFill(data, 512);
+                hash3AndFill(data, 256);
+                hash3AndFill(data, 384);
+                hash3AndFill(data, 512);
             });
 
             document.querySelectorAll('.shagroup input').forEach(v => {
@@ -90,6 +99,18 @@
             <div class="shagroup">
                 <label for="SHA-512-Text">SHA-512:</label>
                 <input type="text" id="SHA-512-Text" readonly="readonly">
+            </div>
+            <div class="shagroup">
+                <label for="SHA3-256-Text">SHA3-256:</label>
+                <input type="text" id="SHA3-256-Text" readonly="readonly">
+            </div>
+            <div class="shagroup">
+                <label for="SHA3-384-Text">SHA3-384:</label>
+                <input type="text" id="SHA3-384-Text" readonly="readonly">
+            </div>
+            <div class="shagroup">
+                <label for="SHA3-512-Text">SHA3-512:</label>
+                <input type="text" id="SHA3-512-Text" readonly="readonly">
             </div>
         </div>
         <div>
