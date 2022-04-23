@@ -33,11 +33,13 @@
             });
 
             document.querySelectorAll('.shagroup input').forEach(v => {
-                v.addEventListener('click', () => {
-                    navigator.clipboard.writeText(v.value)
-                        .then(
-                            () => alert('Copied hash value ' + v.value)
-                        );
+                v.addEventListener('click', async () => {
+                    await navigator.clipboard.writeText(v.value);
+                    copiedInfoDialogP.textContent = 'Hash copied: ' + v.value;
+                    copiedInfoDialog.showModal();
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    copiedInfoDialog.close();
+                    copiedInfoDialogP.textContent = '';
                 });
             });
         }
@@ -47,7 +49,6 @@
                 .map(x => x.toString(16).padStart(2, '0'))
                 .join('');
         }
-
         document.addEventListener('DOMContentLoaded', main);
     </script>
     <style>
@@ -117,7 +118,9 @@
             <input type="button" id="generateButton" value="Compute">
         </div>
     </div>
-
+    <dialog id="copiedInfoDialog">
+        <p id="copiedInfoDialogP"></p>
+    </dialog>
 </body>
 
 </html>
